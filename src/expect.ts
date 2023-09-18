@@ -32,10 +32,6 @@ export class AssertionError extends Error {
   }
 }
 
-// =============================================================================
-// BEGIN ValueNode
-// =============================================================================
-
 export interface Mismatch {
   readonly explanation: string;
 }
@@ -216,10 +212,6 @@ export function keyedItems<Item, KeyProperty extends keyof Item>(
   }
   return new KeyedItems(keyProperty, expectedEntries, toHashable);
 }
-
-// =============================================================================
-// BEGIN matcher implementations
-// =============================================================================
 
 class ObjectMatcher<T> extends Matcher<T> {
   constructor(
@@ -562,7 +554,3 @@ function describeProperty(property: unknown) {
     ? property
     : describe(property);
 }
-
-// =============================================================================
-// END matcher implementations
-// =============================================================================
