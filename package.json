@@ -1,6 +1,6 @@
 {
   "name": "buckwheat",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A TypeScript assertion library for writing useful unit tests faster",
   "main": "dist/expect.js",
   "module": "dist/main.js",
