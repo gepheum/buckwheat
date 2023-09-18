@@ -1,0 +1,29 @@
+{
+  "name": "buckwheat",
+  "version": "1.0.0",
+  "description": "A TypeScript assertion library for writing useful unit tests faster",
+  "main": "dist/expect.js",
+  "module": "dist/main.js",
+  "types": "dist/expect.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gepheum/buckwheat.git"
+  },
+  "author": "Osi Daro <gepheum@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gepheum/buckwheat/issues"
+  },
+  "homepage": "https://github.com/gepheum/buckwheat#readme",
+  "devDependencies": {
+    "@types/mocha": "latest",
+    "@types/node": "^20.6.0",
+    "mocha": "latest",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
