@@ -168,6 +168,17 @@ export type ImplicitMatcher<T> = //
 
 export type AnyMatcher<T> = ImplicitMatcher<T> | Matcher<T>;
 
+export function is<T>(expected: T): Matcher<T> {
+  return new ValueIs(expected);
+}
+
+export function compares(
+  operator: "<" | "<=" | ">" | ">=",
+  limit: number,
+): Matcher<number> {
+  return new ComparingMatcher(operator, limit);
+}
+
 export function toMatcher<T>(input: AnyMatcher<T>): Matcher<T> {
   // TODO: see if I can avoid the casts inside this function?
   if (input instanceof Matcher) {
@@ -442,7 +453,7 @@ class KeyedItems<Item, KeyProperty extends keyof Item>
 }
 
 class ValueIs<T> extends Matcher<T> {
-  constructor(readonly expected: T) {
+  constructor(private readonly expected: T) {
     super();
   }
 
@@ -462,6 +473,45 @@ class ValueIs<T> extends Matcher<T> {
 
   toString() {
     return describe(this.expected);
+  }
+}
+
+class ComparingMatcher extends Matcher<number> {
+  constructor(
+    private readonly operator: "<" | "<=" | ">" | ">=",
+    private readonly limit: number,
+  ) {
+    super();
+  }
+
+  [MATCHES](input: number): ValueNode {
+    let ok: boolean;
+    switch (this.operator) {
+      case "<":
+        ok = input < this.limit;
+        break;
+      case "<=":
+        ok = input <= this.limit;
+        break;
+      case ">":
+        ok = input > this.limit;
+        break;
+      case ">=":
+        ok = input >= this.limit;
+        break;
+    }
+    const mismatch: Mismatch | undefined = ok ? undefined : {
+      explanation: `be ${this.operator} ${this.limit}`
+    };
+    return {
+      kind: "simple",
+      description: describe(input),
+      mismatch: mismatch,
+    };
+  }
+
+  toString() {
+    return `compares(${this.operator}, ${this.limit})`;
   }
 }
 

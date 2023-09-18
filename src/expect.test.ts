@@ -1,5 +1,5 @@
 import { describe, it } from "mocha";
-import { expect } from "./expect";
+import { compares, expect } from "./expect";
 
 interface User {
   userId: number;
@@ -23,5 +23,22 @@ describe("match object", () => {
       userId: 123,
       lastName: "Doe",
     });
+  });
+});
+
+describe("comparison matcher", () => {
+  it("<", () => {
+    expect(3).toMatch(compares("<", 4));
+  });
+  it("<=", () => {
+    expect(3).toMatch(compares("<=", 3));
+    expect(3).toMatch(compares("<=", 4));
+  });
+  it(">", () => {
+    expect(3).toMatch(compares(">", 2));
+  });
+  it("<", () => {
+    expect(3).toMatch(compares(">=", 2));
+    expect(3).toMatch(compares(">=", 3));
   });
 });
