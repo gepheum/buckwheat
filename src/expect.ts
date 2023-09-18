@@ -503,7 +503,7 @@ class ComparingMatcher extends Matcher<number | bigint> {
         break;
     }
     const mismatch: Mismatch | undefined = ok ? undefined : {
-      explanation: `be ${this.operator} ${this.limit}`
+      explanation: `be ${this.operator} ${this.limit}`,
     };
     return {
       kind: "simple",
