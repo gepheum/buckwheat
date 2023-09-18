@@ -29,6 +29,9 @@ describe("match object", () => {
 describe("comparison matcher", () => {
   it("<", () => {
     expect(3).toMatch(compares("<", 4));
+    expect(BigInt(3)).toMatch(compares("<", 4));
+    expect(3).toMatch(compares("<", BigInt(4)));
+    expect(BigInt(3)).toMatch(compares("<", BigInt(4)));
   });
   it("<=", () => {
     expect(3).toMatch(compares("<=", 3));

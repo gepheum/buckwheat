@@ -2,16 +2,12 @@ export function expect<T>(actual: T): Expecter<T> {
   return new Expecter(actual);
 }
 
-export const ACTUAL: unique symbol = Symbol();
-
 export class Expecter<T> {
-  constructor(actual: T) {
-    this[ACTUAL] = actual;
-  }
+  constructor(private readonly actual: T) {}
 
   toMatch(matcher: AnyMatcher<T>): void {
     matcher = toMatcher(matcher);
-    const valueNode = matcher[MATCHES](this[ACTUAL]);
+    const valueNode = matcher[MATCHES](this.actual);
     if (isOk(valueNode)) {
       return;
     }
@@ -20,10 +16,16 @@ export class Expecter<T> {
   }
 
   toBe(expected: T): void {
-    return this.toMatch(new ValueIs(expected));
+    return this.toMatch(is(expected));
   }
 
-  readonly [ACTUAL]: T;
+  toCompare(
+    this: Expecter<number | bigint>,
+    operator: "<" | "<=" | ">" | ">=",
+    limit: number | bigint,
+  ): void {
+    return this.toMatch(compares(operator, limit));
+  }
 }
 
 export class AssertionError extends Error {
@@ -174,8 +176,8 @@ export function is<T>(expected: T): Matcher<T> {
 
 export function compares(
   operator: "<" | "<=" | ">" | ">=",
-  limit: number,
-): Matcher<number> {
+  limit: number | bigint,
+): Matcher<number | bigint> {
   return new ComparingMatcher(operator, limit);
 }
 
@@ -476,15 +478,15 @@ class ValueIs<T> extends Matcher<T> {
   }
 }
 
-class ComparingMatcher extends Matcher<number> {
+class ComparingMatcher extends Matcher<number | bigint> {
   constructor(
     private readonly operator: "<" | "<=" | ">" | ">=",
-    private readonly limit: number,
+    private readonly limit: number | bigint,
   ) {
     super();
   }
 
-  [MATCHES](input: number): ValueNode {
+  [MATCHES](input: number | bigint): ValueNode {
     let ok: boolean;
     switch (this.operator) {
       case "<":
