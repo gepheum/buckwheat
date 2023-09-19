@@ -14,6 +14,8 @@
     "esModuleInterop": true,
     "outDir": "dist",
     "allowUnreachableCode": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext"
   }
 }
