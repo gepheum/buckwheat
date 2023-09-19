@@ -1,5 +1,5 @@
 import { describe, it } from "mocha";
-import { compares, expect } from "./expect";
+import { compares, expect } from "./expect.js";
 
 interface User {
   userId: number;
