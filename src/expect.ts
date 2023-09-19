@@ -1,3 +1,5 @@
+// https://github.com/l2beat/earl/tree/master/packages/earl
+
 export function expect<T>(actual: T): Expecter<T> {
   return new Expecter(actual);
 }
@@ -269,8 +271,8 @@ class ArrayMatcher<Item> extends Matcher<Array<Item>> {
     const { matchers } = this;
     const outItems: ArrayNode.Item[] = [];
     for (let i = 0; i < input.length && i < matchers.length; ++i) {
-      const matcher = matchers[i];
-      const inItem = input[i];
+      const matcher = matchers[i]!;
+      const inItem = input[i]!;
       outItems.push({
         kind: "present",
         node: matcher[MATCHES](inItem),

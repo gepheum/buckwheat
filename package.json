@@ -2,11 +2,25 @@
   "name": "buckwheat",
   "version": "1.0.4",
   "description": "A TypeScript assertion library for writing useful unit tests faster",
-  "main": "dist/expect.js",
-  "module": "dist/main.js",
-  "types": "dist/expect.d.ts",
+  "type": "module",
+  "main": "./dist/cjs/expect.js",
+  "module": "./dist/esm/expect.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/expect.js",
+      "require": "./dist/cjs/expect.js"
+    }
+  },
+  "files": [
+    "dist/cjs",
+    "dist/esm",
+    "src",
+    "!**/*.test.ts"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json && cp static/package-cjs.json dist/cjs/package.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json && cp static/package-esm.json dist/esm/package.json",
     "test": "mocha"
   },
   "repository": {
