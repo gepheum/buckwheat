@@ -1,47 +1,55 @@
 import { describe, it } from "mocha";
-import { compares, expect } from "./expect.js";
+import { AssertionError, expect } from "./expect.js";
+import { is } from "./matchers.js";
 
-interface User {
-  userId: number;
-  firstName: string;
-  lastName: string;
-}
-
-describe("match object", () => {
-  const johnDoe: User = {
-    userId: 123,
-    firstName: "John",
-    lastName: "Doe",
-  };
-  it("matches object with right first name", () => {
-    expect(johnDoe).toMatch({
-      firstName: "John",
+describe("expect", () => {
+  describe("toBe", () => {
+    it("when satisfied", () => {
+      const o = {};
+      expect(o).toBe(o);
+    });
+    it("when not satisfied", () => {
+      try {
+        expect({}).toBe({});
+      } catch (e) {
+        if (e instanceof AssertionError) {
+          return;
+        }
+      }
+      throw new AssertionError("`expect` should have thrown an AssertionError");
     });
   });
-  it("matches object with right last name", () => {
-    expect(johnDoe).toMatch({
-      userId: 123,
-      lastName: "Doe",
+
+  describe("toMatch", () => {
+    it("when satisfied", () => {
+      const o = {};
+      expect(o).toMatch(is(o));
+    });
+    it("when not satisfied", () => {
+      try {
+        expect({}).toMatch(is({}));
+      } catch (e) {
+        if (e instanceof AssertionError) {
+          return;
+        }
+      }
+      throw new AssertionError("`expect` should have thrown an AssertionError");
     });
   });
-});
 
-describe("comparison matcher", () => {
-  it("<", () => {
-    expect(3).toMatch(compares("<", 4));
-    expect(BigInt(3)).toMatch(compares("<", 4));
-    expect(3).toMatch(compares("<", BigInt(4)));
-    expect(BigInt(3)).toMatch(compares("<", BigInt(4)));
-  });
-  it("<=", () => {
-    expect(3).toMatch(compares("<=", 3));
-    expect(3).toMatch(compares("<=", 4));
-  });
-  it(">", () => {
-    expect(3).toMatch(compares(">", 2));
-  });
-  it("<", () => {
-    expect(3).toMatch(compares(">=", 2));
-    expect(3).toMatch(compares(">=", 3));
+  describe("toCompare", () => {
+    it("when satisfied", () => {
+      expect(1).toCompare("<", 2);
+    });
+    it("when not satisfied", () => {
+      try {
+        expect(2).toCompare("<", 1);
+      } catch (e) {
+        if (e instanceof AssertionError) {
+          return;
+        }
+      }
+      throw new AssertionError("`expect` should have thrown an AssertionError");
+    });
   });
 });
