@@ -25,9 +25,29 @@ describe("expect", () => {
       const o = {};
       expect(o).toMatch(is(o));
     });
-    it("when not satisfied", () => {
+    it("when not satisfied because of mismatch", () => {
       try {
         expect({}).toMatch(is({}));
+      } catch (e) {
+        if (e instanceof AssertionError) {
+          return;
+        }
+      }
+      throw new AssertionError("`expect` should have thrown an AssertionError");
+    });
+    it("when not satisfied because of missing item", () => {
+      try {
+        expect([2]).toMatch(is([]));
+      } catch (e) {
+        if (e instanceof AssertionError) {
+          return;
+        }
+      }
+      throw new AssertionError("`expect` should have thrown an AssertionError");
+    });
+    it("when not satisfied because of extra item", () => {
+      try {
+        expect([2]).toMatch(is([2, 3]));
       } catch (e) {
         if (e instanceof AssertionError) {
           return;

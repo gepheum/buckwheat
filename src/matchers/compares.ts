@@ -37,6 +37,6 @@ export class ComparesMatcher extends Matcher<number | bigint> {
   }
 
   toString() {
-    return `compares(${this.operator}, ${this.limit})`;
+    return `compares("${this.operator}", ${this.limit})`;
   }
 }

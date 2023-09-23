@@ -30,7 +30,7 @@ export class MapMatcher<K, V> extends Matcher<ReadonlyMap<K, V>> {
     // Missing keys.
     for (const expectedEntry of expectedEntries) {
       const key = expectedEntry[0];
-      if (expectedEntries.has(key)) {
+      if (input.has(key)) {
         continue;
       }
       const description = describeValue(key);

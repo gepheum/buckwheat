@@ -11,6 +11,19 @@ describe("valueToNode", () => {
     });
   });
 
+  it("works with multiline string", () => {
+    expect(valueToNode("foo\nbar\n")).toMatch({
+      kind: "simple",
+      description: [
+        "[",
+        '  "foo",',
+        '  "bar",',
+        '  "",',
+        '].join("\\n")',
+      ].join("\n"),
+    });
+  });
+
   it("works with number", () => {
     expect(valueToNode(3.14)).toMatch({
       kind: "simple",

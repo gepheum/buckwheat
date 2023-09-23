@@ -39,8 +39,18 @@ export function valueToNode(
       } else {
         return simpleNode(JSON.stringify(value));
       }
-    } else if (typeof value === "string" || typeof value === "boolean") {
-      return simpleNode(JSON.stringify(value));
+    } else if (typeof value === "boolean") {
+      return simpleNode(String(value));
+    } else if (typeof value === "string") {
+      const lines = value.split("\n");
+      if (lines.length <= 1) {
+        return simpleNode(JSON.stringify(value));
+      } else {
+        const contents = lines
+          .map((l) => `  ${JSON.stringify(l)},\n`)
+          .join("");
+        return simpleNode(`[\n${contents}].join("\\n")`);
+      }
     } else if (typeof value === "bigint") {
       return simpleNode(`BigInt(${JSON.stringify(String(value))})`);
     } else if (

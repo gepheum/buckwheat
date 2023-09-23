@@ -38,7 +38,7 @@ export class KeyedItemsMatcher<Item, KeyProperty extends keyof Item>
     // Missing keys.
     for (const expectedEntry of expectedEntries) {
       const key = expectedEntry[0];
-      if (expectedEntries.has(key)) {
+      if (input.has(key)) {
         continue;
       }
       const description = describeValue(expectedEntry[1]);

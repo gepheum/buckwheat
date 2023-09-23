@@ -136,7 +136,7 @@ export function keyedItems<Item, KeyProperty extends keyof Item>(
     const hashable = toHashable(key);
     if (expectedEntries.has(hashable)) {
       throw new Error(
-        `Multiple matchers passed to #keyedItems() have the same key: ${key}`,
+        `Matchers passed to #keyedItems() must have distinct keys; duplicate key: ${key}`,
       );
     }
     expectedEntries.set(hashable, toMatcher(item as AnyMatcher<unknown>));
