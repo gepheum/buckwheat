@@ -1,6 +1,6 @@
 import { describe, it } from "mocha";
 import { expect } from "../expect.js";
-import { MATCHES } from "../matcher.js";
+import { MATCHES, Matcher } from "../matcher.js";
 import { is } from "../matchers.js";
 import { MapMatcher } from "./map.js";
 
@@ -84,5 +84,16 @@ describe("MapMatcher", () => {
         ],
       },
     );
+  });
+
+  it("can handle values of unexpected type", () => {
+    const matcher = new MapMatcher(new Map());
+    expect((matcher as Matcher<unknown>)[MATCHES](true)).toMatch({
+      kind: "simple",
+      description: "true",
+      mismatch: {
+        expected: "be a Map, actually is a boolean",
+      }
+    });
   });
 });

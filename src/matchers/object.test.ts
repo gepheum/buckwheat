@@ -46,4 +46,15 @@ describe("ObjectMatcher", () => {
       },
     );
   });
+
+  it("can handle values of unexpected type", () => {
+    const matcher = new ObjectMatcher({});
+    expect((matcher as Matcher<unknown>)[MATCHES](true)).toMatch({
+      kind: "simple",
+      description: "true",
+      mismatch: {
+        expected: "be an object, actually is a boolean",
+      }
+    });
+  });
 });

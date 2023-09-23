@@ -1,5 +1,6 @@
 import { describeValue } from "../describe_node.js";
 import { Matcher, MATCHES } from "../matcher.js";
+import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { SimpleNode, ValueNode } from "../value_node.js";
 
 export class ComparesMatcher extends Matcher<number | bigint> {
@@ -11,6 +12,9 @@ export class ComparesMatcher extends Matcher<number | bigint> {
   }
 
   [MATCHES](input: number | bigint): ValueNode {
+    if (typeof input !== "number" && typeof input !== "bigint") {
+      return valueOfUnexpectedTypeToNode(input, "number");
+    }
     let ok: boolean;
     switch (this.operator) {
       case "<":

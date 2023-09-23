@@ -1,6 +1,6 @@
 import { describe, it } from "mocha";
 import { expect } from "../expect.js";
-import { MATCHES } from "../matcher.js";
+import { MATCHES, Matcher } from "../matcher.js";
 import { SetMatcher } from "./set.js";
 
 describe("SetMatcher", () => {
@@ -69,5 +69,16 @@ describe("SetMatcher", () => {
           },
         ],
       });
+  });
+
+  it("can handle values of unexpected type", () => {
+    const matcher = new SetMatcher(new Set());
+    expect((matcher as Matcher<unknown>)[MATCHES](true)).toMatch({
+      kind: "simple",
+      description: "true",
+      mismatch: {
+        expected: "be a Set, actually is a boolean",
+      }
+    });
   });
 });

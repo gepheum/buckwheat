@@ -2,7 +2,7 @@ import { describe, it } from "mocha";
 import { expect } from "../expect.js";
 import { ArrayMatcher } from "./array.js";
 import { compares, is } from "../matchers.js";
-import { MATCHES } from "../matcher.js";
+import { MATCHES, Matcher } from "../matcher.js";
 
 describe("ArrayMatcher", () => {
   it("works with missing items", () => {
@@ -57,5 +57,16 @@ describe("ArrayMatcher", () => {
   it("#toString()", () => {
     const matcher = new ArrayMatcher([compares(">=", 10)]);
     expect(matcher.toString()).toBe('[\n  compares(">=", 10),\n]');
+  });
+
+  it("can handle values of unexpected type", () => {
+    const matcher = new ArrayMatcher([]);
+    expect((matcher as Matcher<unknown>)[MATCHES](1)).toMatch({
+      kind: "simple",
+      description: "1",
+      mismatch: {
+        expected: "be an array, actually is a number",
+      }
+    });
   });
 });

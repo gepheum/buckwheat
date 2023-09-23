@@ -225,4 +225,15 @@ describe("KeyedItemsMatcher", () => {
       ],
     });
   });
+
+  it("can handle values of unexpected type", () => {
+    const matcher: Matcher<Item[]> = keyedItems("key", []);
+    expect((matcher as Matcher<unknown>)[MATCHES](1)).toMatch({
+      kind: "simple",
+      description: "1",
+      mismatch: {
+        expected: "be an array, actually is a number",
+      }
+    });
+  });
 });

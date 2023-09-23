@@ -1,5 +1,6 @@
 import { describeValue } from "../describe_node.js";
 import { Matcher, MATCHES } from "../matcher.js";
+import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { ValueNode } from "../value_node.js";
 
 export class ObjectMatcher<T> extends Matcher<T> {
@@ -12,6 +13,9 @@ export class ObjectMatcher<T> extends Matcher<T> {
   }
 
   [MATCHES](input: Readonly<T>): ValueNode {
+    if (typeof input !== "object") {
+      return valueOfUnexpectedTypeToNode(input, "object");
+    }
     const record: { [p: PropertyKey]: ValueNode } = {};
     for (const property in this.spec) {
       const value = applyMatcherToFieldValue(input, property, this.spec);

@@ -1,6 +1,7 @@
 import { describeValue } from "../describe_node.js";
 import { indentText } from "../format.js";
 import { Matcher, MATCHES } from "../matcher.js";
+import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { ArrayNode, ValueNode } from "../value_node.js";
 
 export class ArrayMatcher<Item> extends Matcher<Array<Item>> {
@@ -9,6 +10,9 @@ export class ArrayMatcher<Item> extends Matcher<Array<Item>> {
   }
 
   [MATCHES](input: ReadonlyArray<Item>): ValueNode {
+    if (!Array.isArray(input)) {
+      return valueOfUnexpectedTypeToNode(input, "array");
+    }
     const { matchers } = this;
     const outItems: ArrayNode.Item[] = [];
     for (let i = 0; i < input.length && i < matchers.length; ++i) {

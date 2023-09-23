@@ -1,6 +1,6 @@
 import { describe, it } from "mocha";
 import { expect } from "../expect.js";
-import { MATCHES } from "../matcher.js";
+import { MATCHES, Matcher } from "../matcher.js";
 import { ComparesMatcher } from "./compares.js";
 
 describe("ComparesMatcher", () => {
@@ -97,5 +97,16 @@ describe("ComparesMatcher", () => {
   it("#toString()", () => {
     const matcher = new ComparesMatcher(">", 2);
     expect(matcher.toString()).toBe('compares(">", 2)');
+  });
+
+  it("can handle values of unexpected type", () => {
+    const matcher = new ComparesMatcher(">", 2);
+    expect((matcher as Matcher<unknown>)[MATCHES]("foo")).toMatch({
+      kind: "simple",
+      description: "\"foo\"",
+      mismatch: {
+        expected: "be a number, actually is a string",
+      }
+    });
   });
 });

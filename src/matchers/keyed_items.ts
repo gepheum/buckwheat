@@ -1,6 +1,7 @@
 import { describeValue } from "../describe_node.js";
 import { indentText } from "../format.js";
 import { Matcher, MATCHES } from "../matcher.js";
+import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { ArrayNode, ValueNode } from "../value_node.js";
 
 export class KeyedItemsMatcher<Item, KeyProperty extends keyof Item>
@@ -14,6 +15,9 @@ export class KeyedItemsMatcher<Item, KeyProperty extends keyof Item>
   }
 
   [MATCHES](input: ReadonlyArray<Item> | Map<unknown, Item>): ValueNode {
+    if (!Array.isArray(input)) {
+      return valueOfUnexpectedTypeToNode(input, "array");
+    }
     input = new Map(
       [...input.values()].map((e) => [this.toHashable(e[this.keyProperty]), e]),
     );

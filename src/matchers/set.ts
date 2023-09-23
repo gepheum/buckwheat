@@ -1,6 +1,7 @@
 import { describeValue } from "../describe_node.js";
 import { indentText } from "../format.js";
 import { Matcher, MATCHES } from "../matcher.js";
+import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { ArrayNode, ValueNode } from "../value_node.js";
 
 export class SetMatcher<T> extends Matcher<ReadonlySet<T>> {
@@ -9,6 +10,9 @@ export class SetMatcher<T> extends Matcher<ReadonlySet<T>> {
   }
 
   [MATCHES](input: ReadonlySet<T>): ValueNode {
+    if (!(input instanceof Set)) {
+      return valueOfUnexpectedTypeToNode(input, "Set");
+    }
     const { expectedElements } = this;
     const outItems: ArrayNode.Item[] = [];
     for (const actualElement of input) {

@@ -1,6 +1,7 @@
 import { describeValue } from "../describe_node.js";
 import { indentText } from "../format.js";
 import { Matcher, MATCHES } from "../matcher.js";
+import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { ArrayNode, ValueNode } from "../value_node.js";
 
 export class MapMatcher<K, V> extends Matcher<ReadonlyMap<K, V>> {
@@ -9,6 +10,9 @@ export class MapMatcher<K, V> extends Matcher<ReadonlyMap<K, V>> {
   }
 
   [MATCHES](input: ReadonlyMap<K, V>): ValueNode {
+    if (!(input instanceof Map)) {
+      return valueOfUnexpectedTypeToNode(input, "Map");
+    }
     const { expectedEntries } = this;
     const outItems: ArrayNode.Item[] = [];
     for (const actualEntry of input.entries()) {
