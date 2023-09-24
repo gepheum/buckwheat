@@ -233,7 +233,7 @@ describe("KeyedItemsMatcher", () => {
       description: "1",
       mismatch: {
         expected: "be an array, actually is a number",
-      }
+      },
     });
   });
 });

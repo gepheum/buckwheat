@@ -1,6 +1,6 @@
 import { describe, it } from "mocha";
 import { expect } from "../expect.js";
-import { MATCHES, Matcher } from "../matcher.js";
+import { Matcher, MATCHES } from "../matcher.js";
 import { is } from "../matchers.js";
 import { MapMatcher } from "./map.js";
 
@@ -93,7 +93,7 @@ describe("MapMatcher", () => {
       description: "true",
       mismatch: {
         expected: "be a Map, actually is a boolean",
-      }
+      },
     });
   });
 });

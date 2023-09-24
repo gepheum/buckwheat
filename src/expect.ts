@@ -29,7 +29,9 @@ export class Expecter<T> {
       return;
     }
     const actualDescription = describeNode(valueNode, "");
-    throw new AssertionError(`Actual:\n\n${indentText(actualDescription)}\n`);
+    throw new AssertionError(
+      `\x1b[0mthe actual value is:\n\n${indentText(actualDescription)}\n`,
+    );
   }
 
   /**
@@ -67,6 +69,7 @@ export class Expecter<T> {
 export class AssertionError extends Error {
   constructor(message: string) {
     super(message);
+    this.name = "AssertionError";
   }
 }
 

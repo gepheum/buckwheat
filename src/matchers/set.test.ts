@@ -1,6 +1,6 @@
 import { describe, it } from "mocha";
 import { expect } from "../expect.js";
-import { MATCHES, Matcher } from "../matcher.js";
+import { Matcher, MATCHES } from "../matcher.js";
 import { SetMatcher } from "./set.js";
 
 describe("SetMatcher", () => {
@@ -78,7 +78,7 @@ describe("SetMatcher", () => {
       description: "true",
       mismatch: {
         expected: "be a Set, actually is a boolean",
-      }
+      },
     });
   });
 });

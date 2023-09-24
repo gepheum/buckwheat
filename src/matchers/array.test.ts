@@ -2,7 +2,7 @@ import { describe, it } from "mocha";
 import { expect } from "../expect.js";
 import { ArrayMatcher } from "./array.js";
 import { compares, is } from "../matchers.js";
-import { MATCHES, Matcher } from "../matcher.js";
+import { Matcher, MATCHES } from "../matcher.js";
 
 describe("ArrayMatcher", () => {
   it("works with missing items", () => {
@@ -66,7 +66,7 @@ describe("ArrayMatcher", () => {
       description: "1",
       mismatch: {
         expected: "be an array, actually is a number",
-      }
+      },
     });
   });
 });

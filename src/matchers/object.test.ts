@@ -54,7 +54,7 @@ describe("ObjectMatcher", () => {
       description: "true",
       mismatch: {
         expected: "be an object, actually is a boolean",
-      }
+      },
     });
   });
 });

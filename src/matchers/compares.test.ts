@@ -1,6 +1,6 @@
 import { describe, it } from "mocha";
 import { expect } from "../expect.js";
-import { MATCHES, Matcher } from "../matcher.js";
+import { Matcher, MATCHES } from "../matcher.js";
 import { ComparesMatcher } from "./compares.js";
 
 describe("ComparesMatcher", () => {
@@ -103,10 +103,10 @@ describe("ComparesMatcher", () => {
     const matcher = new ComparesMatcher(">", 2);
     expect((matcher as Matcher<unknown>)[MATCHES]("foo")).toMatch({
       kind: "simple",
-      description: "\"foo\"",
+      description: '"foo"',
       mismatch: {
         expected: "be a number, actually is a string",
-      }
+      },
     });
   });
 });
