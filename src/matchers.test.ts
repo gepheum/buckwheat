@@ -65,6 +65,18 @@ describe("toMatcher", () => {
     });
   });
 
+  it("accepts Date", () => {
+    const matcher: Matcher<Date> = toMatcher(new Date(1695545911807));
+    expect(matcher[MATCHES](new Date(1695545911807))).toMatch({
+      kind: "simple",
+      mismatch: undefined,
+    });
+    expect(matcher[MATCHES](new Date(1695545911808))).toMatch({
+      kind: "simple",
+      mismatch: {},
+    });
+  });
+
   it("accepts Record<K, V>", () => {
     const matcher: Matcher<Record<number, string>> = toMatcher(
       { 3: "(3)" } as Record<number, string>,

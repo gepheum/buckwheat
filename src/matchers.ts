@@ -3,6 +3,7 @@
 import { AnyMatcher, Matcher } from "./matcher.js";
 import { ArrayMatcher } from "./matchers/array.js";
 import { ComparesMatcher } from "./matchers/compares.js";
+import { DateMatcher } from "./matchers/date.js";
 import { IsMatcher } from "./matchers/is.js";
 import { KeyedItemsMatcher } from "./matchers/keyed_items.js";
 import { MapMatcher } from "./matchers/map.js";
@@ -36,6 +37,8 @@ export function toMatcher<T>(input: AnyMatcher<T>): Matcher<T>;
  * <li>If `input` is a `Map<K, AnyMatcher<V>>`, returns a matcher which verifies
  * that the actual map has the same keys as `input`, and that every value in the
  * actual map matches the matcher with the same key in `input.
+ * <li>If `input` is a `Date`, returns a matcher which verifies that the actual
+ * date has the same timestamp as `input`.
  * <li>If `input` is an object, returns a matcher which verifies that the
  * properties of the actual object are a subset of the properties of `input`,
  * and that every value in the actual object matches the corresponding matcher
@@ -56,6 +59,8 @@ export function toMatcher<T>(input: AnyMatcher<T>): Matcher<T> {
     const expectedEntries = //
       new Map([...input.entries()].map((e) => [e[0], toMatcher(e[1])]));
     return new MapMatcher(expectedEntries) as unknown as Matcher<T>;
+  } else if (input instanceof Date) {
+    return new DateMatcher(input) as unknown as Matcher<T>;
   } else if (input instanceof Object) {
     const spec: Record<PropertyKey, Matcher<unknown>> = {};
     for (const entry of Object.entries(input)) {
