@@ -9,7 +9,7 @@ import {
   prefixEachLinePastFirst,
 } from "./format.js";
 
-describe("prefixEachLinePastFirst", () => {
+describe("prefixEachLinePastFirst()", () => {
   it("works with single-line string", () => {
     expect(prefixEachLinePastFirst("foo", "Z")).toBe("foo");
   });
@@ -19,31 +19,31 @@ describe("prefixEachLinePastFirst", () => {
   });
 });
 
-describe("prefixEachLine", () => {
+describe("prefixEachLine()", () => {
   it("works", () => {
     expect(prefixEachLine("foo\nbar", "Z")).toBe("Zfoo\nZbar");
   });
 });
 
-describe("indentText", () => {
+describe("indentText()", () => {
   it("works", () => {
     expect(indentText("foo\nbar")).toBe("  foo\n  bar");
   });
 });
 
-describe("commentOut", () => {
+describe("commentOut()", () => {
   it("works", () => {
     expect(commentOut("foo\nbar")).toBe("// foo\n// bar");
   });
 });
 
-describe("makeRed", () => {
+describe("makeRed()", () => {
   it("works", () => {
     expect(makeRed("foo")).toBe("\u001b[31mfoo\u001b[0m");
   });
 });
 
-describe("makeCyan", () => {
+describe("makeCyan()", () => {
   it("works", () => {
     expect(makeCyan("foo")).toBe("\u001b[36mfoo\u001b[0m");
   });

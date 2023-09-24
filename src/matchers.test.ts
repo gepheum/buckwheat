@@ -4,7 +4,7 @@ import { IsMatcher } from "./matchers/is.js";
 import { is, toMatcher } from "./matchers.js";
 import { AnyMatcher, Matcher, MATCHES } from "./matcher.js";
 
-describe("toMatcher", () => {
+describe("toMatcher()", () => {
   it("returns Matcher as-is", () => {
     const matcher: Matcher<number> = toMatcher(new IsMatcher(7));
     expect<unknown>(toMatcher(matcher)).toBe(matcher);
@@ -102,5 +102,5 @@ describe("toMatcher", () => {
   });
 });
 
-describe("`is` factory function", () => {
+describe("is() factory function", () => {
 });

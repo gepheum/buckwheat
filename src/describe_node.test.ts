@@ -2,7 +2,7 @@ import { describe, it } from "mocha";
 import { expect } from "./expect.js";
 import { describeNode } from "./describe_node.js";
 
-describe("describeNode", () => {
+describe("describeNode()", () => {
   it("describes simple node", () => {
     expect(describeNode({
       kind: "simple",

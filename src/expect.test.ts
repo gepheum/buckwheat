@@ -2,8 +2,8 @@ import { describe, it } from "mocha";
 import { AssertionError, expect } from "./expect.js";
 import { is } from "./matchers.js";
 
-describe("expect", () => {
-  describe("toBe", () => {
+describe("expect()", () => {
+  describe("toBe()", () => {
     it("when satisfied", () => {
       const o = {};
       expect(o).toBe(o);
@@ -20,7 +20,7 @@ describe("expect", () => {
     });
   });
 
-  describe("toMatch", () => {
+  describe("toMatch()", () => {
     it("when satisfied", () => {
       const o = {};
       expect(o).toMatch(is(o));

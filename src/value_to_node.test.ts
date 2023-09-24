@@ -3,7 +3,7 @@ import { describe, it } from "mocha";
 import { expect } from "./expect.js";
 import { REPRESENT_AS_SIMPLE_NODE, valueToNode } from "./value_to_node.js";
 
-describe("valueToNode", () => {
+describe("valueToNode()", () => {
   it("works with string", () => {
     expect(valueToNode("foo")).toMatch({
       kind: "simple",

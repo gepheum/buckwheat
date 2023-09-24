@@ -4,7 +4,7 @@ import { valueOfUnexpectedTypeToNode } from "./unexpected_type.js";
 
 class Point {}
 
-describe("valueOfUnexpectedTypeToNode", () => {
+describe("valueOfUnexpectedTypeToNode()", () => {
   it("works", () => {
     expect(valueOfUnexpectedTypeToNode(3, "array")).toMatch({
       kind: "simple",
