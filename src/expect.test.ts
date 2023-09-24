@@ -57,6 +57,22 @@ describe("expect()", () => {
     });
   });
 
+  describe("toBeNear", () => {
+    it("when satisfied", () => {
+      expect(3.14).toBeNear(3.14159, 0.01);
+    });
+    it("when not satisfied", () => {
+      try {
+        expect(3.14).toBeNear(3.14159, 0.001);
+      } catch (e) {
+        if (e instanceof AssertionError) {
+          return;
+        }
+      }
+      throw new AssertionError("`expect` should have thrown an AssertionError");
+    });
+  });
+
   describe("toCompare", () => {
     it("when satisfied", () => {
       expect(1).toCompare("<", 2);

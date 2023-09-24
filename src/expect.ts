@@ -1,7 +1,7 @@
 import { describeNode } from "./describe_node.js";
 import { indentText } from "./format.js";
 import { AnyMatcher, MATCHES } from "./matcher.js";
-import { compares, is, toMatcher } from "./matchers.js";
+import { compares, is, near, toMatcher } from "./matchers.js";
 import { ValueNode } from "./value_node.js";
 
 /**
@@ -46,6 +46,16 @@ export class Expecter<T> {
    */
   toBe(expected: T): void {
     return this.toMatch(is(expected));
+  }
+
+  /**
+   * Verifies that the absolute difference between the actual value and `limit`
+   * is at most `epsilon`. Throws an assertion error otherwise.
+   */
+  toBeNear(
+    this: Expecter<number>,
+    limit: number, epsilon: number): void {
+    return this.toMatch(near(limit, epsilon));
   }
 
   /**

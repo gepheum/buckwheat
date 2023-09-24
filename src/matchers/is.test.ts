@@ -1,12 +1,12 @@
 import { describe, it } from "mocha";
 import { expect } from "../expect.js";
 import { MATCHES } from "../matcher.js";
-import { IsMatcher } from "./is.js";
+import { is } from "../matchers.js";
 
 describe("IsMatcher", () => {
   it("matches", () => {
     const a = {};
-    const matcher = new IsMatcher(a);
+    const matcher = is(a);
     expect(matcher[MATCHES](a)).toMatch(
       {
         kind: "simple",
@@ -17,7 +17,7 @@ describe("IsMatcher", () => {
   });
 
   it("mismatches", () => {
-    const matcher = new IsMatcher({});
+    const matcher = is({});
     expect(matcher[MATCHES]({})).toMatch(
       {
         kind: "simple",
@@ -30,7 +30,7 @@ describe("IsMatcher", () => {
   });
 
   it("#toString()", () => {
-    const matcher = new IsMatcher({});
+    const matcher = is({});
     expect(matcher.toString()).toBe("{}");
   });
 });

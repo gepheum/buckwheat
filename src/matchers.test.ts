@@ -113,6 +113,3 @@ describe("toMatcher()", () => {
     });
   });
 });
-
-describe("is() factory function", () => {
-});

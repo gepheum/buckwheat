@@ -7,6 +7,7 @@ import { DateMatcher } from "./matchers/date.js";
 import { IsMatcher } from "./matchers/is.js";
 import { KeyedItemsMatcher } from "./matchers/keyed_items.js";
 import { MapMatcher } from "./matchers/map.js";
+import { NearMatcher } from "./matchers/near.js";
 import { ObjectMatcher } from "./matchers/object.js";
 import { SetMatcher } from "./matchers/set.js";
 import { StringPatternMatcher } from "./matchers/string_pattern.js";
@@ -88,6 +89,14 @@ export function toMatcher<T>(input: AnyMatcher<T>): Matcher<T> {
  */
 export function is<T>(expected: T): Matcher<T> {
   return new IsMatcher(expected);
+}
+
+/**
+ * Returns a matcher which verifies that the absolute difference between the
+ * actual value and `target` is at most `epsilon`.
+ */
+export function near(target: number, epsilon: number): Matcher<number> {
+  return new NearMatcher(target, epsilon);
 }
 
 /**

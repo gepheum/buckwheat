@@ -1,11 +1,11 @@
 import { describe, it } from "mocha";
 import { expect } from "../expect.js";
 import { Matcher, MATCHES } from "../matcher.js";
-import { ComparesMatcher } from "./compares.js";
+import { compares } from "../matchers.js";
 
 describe("ComparesMatcher", () => {
   it("<=", () => {
-    const matcher = new ComparesMatcher("<=", 2);
+    const matcher = compares("<=", 2);
     expect(matcher[MATCHES](1)).toMatch({
       kind: "simple",
       description: "1",
@@ -24,7 +24,7 @@ describe("ComparesMatcher", () => {
   });
 
   it("not <=", () => {
-    const matcher = new ComparesMatcher("<=", 2);
+    const matcher = compares("<=", 2);
     expect(matcher[MATCHES](3)).toMatch({
       kind: "simple",
       description: "3",
@@ -35,7 +35,7 @@ describe("ComparesMatcher", () => {
   });
 
   it("<", () => {
-    const matcher = new ComparesMatcher("<", 2);
+    const matcher = compares("<", 2);
     expect(matcher[MATCHES](1)).toMatch({
       kind: "simple",
       description: "1",
@@ -44,7 +44,7 @@ describe("ComparesMatcher", () => {
   });
 
   it("not <", () => {
-    const matcher = new ComparesMatcher("<", 2);
+    const matcher = compares("<", 2);
     expect(matcher[MATCHES](2)).toMatch({
       kind: "simple",
       description: "2",
@@ -55,7 +55,7 @@ describe("ComparesMatcher", () => {
   });
 
   it(">=", () => {
-    const matcher = new ComparesMatcher(">=", 2);
+    const matcher = compares(">=", 2);
     expect(matcher[MATCHES](2)).toMatch({
       kind: "simple",
       description: "2",
@@ -64,7 +64,7 @@ describe("ComparesMatcher", () => {
   });
 
   it("not >=", () => {
-    const matcher = new ComparesMatcher(">=", 2);
+    const matcher = compares(">=", 2);
     expect(matcher[MATCHES](1)).toMatch({
       kind: "simple",
       description: "1",
@@ -75,7 +75,7 @@ describe("ComparesMatcher", () => {
   });
 
   it(">", () => {
-    const matcher = new ComparesMatcher(">", 2);
+    const matcher = compares(">", 2);
     expect(matcher[MATCHES](3)).toMatch({
       kind: "simple",
       description: "3",
@@ -84,7 +84,7 @@ describe("ComparesMatcher", () => {
   });
 
   it("not >", () => {
-    const matcher = new ComparesMatcher(">", 2);
+    const matcher = compares(">", 2);
     expect(matcher[MATCHES](2)).toMatch({
       kind: "simple",
       description: "2",
@@ -95,12 +95,12 @@ describe("ComparesMatcher", () => {
   });
 
   it("#toString()", () => {
-    const matcher = new ComparesMatcher(">", 2);
+    const matcher = compares(">", 2);
     expect(matcher.toString()).toBe('compares(">", 2)');
   });
 
   it("can handle values of unexpected type", () => {
-    const matcher = new ComparesMatcher(">", 2);
+    const matcher = compares(">", 2);
     expect((matcher as Matcher<unknown>)[MATCHES]("foo")).toMatch({
       kind: "simple",
       description: '"foo"',
