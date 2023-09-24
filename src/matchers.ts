@@ -9,6 +9,7 @@ import { KeyedItemsMatcher } from "./matchers/keyed_items.js";
 import { MapMatcher } from "./matchers/map.js";
 import { ObjectMatcher } from "./matchers/object.js";
 import { SetMatcher } from "./matchers/set.js";
+import { StringPatternMatcher } from "./matchers/string_pattern.js";
 
 export function toMatcher<T>(input: Matcher<T>): Matcher<T>;
 export function toMatcher<Item, ItemMatcher extends AnyMatcher<Item>>(
@@ -18,6 +19,7 @@ export function toMatcher<Item>(input: ReadonlySet<Item>): Matcher<Set<Item>>;
 export function toMatcher<K, V, M extends AnyMatcher<V>>(
   input: ReadonlyMap<K, M>,
 ): Matcher<Map<K, V>>;
+export function toMatcher(input: RegExp): Matcher<string>;
 export function toMatcher<K extends PropertyKey, V, M extends AnyMatcher<V>>(
   input: Record<K, M>,
 ): Matcher<Record<K, V>>;
@@ -39,6 +41,8 @@ export function toMatcher<T>(input: AnyMatcher<T>): Matcher<T>;
  * actual map matches the matcher with the same key in `input.
  * <li>If `input` is a `Date`, returns a matcher which verifies that the actual
  * date has the same timestamp as `input`.
+ * <li>If `input` is a `RegExpr`, returns a matcher which verifies that there is
+ * at least one match between the expected pattern and the actual string.
  * <li>If `input` is an object, returns a matcher which verifies that the
  * properties of the actual object are a subset of the properties of `input`,
  * and that every value in the actual object matches the corresponding matcher
@@ -61,6 +65,8 @@ export function toMatcher<T>(input: AnyMatcher<T>): Matcher<T> {
     return new MapMatcher(expectedEntries) as unknown as Matcher<T>;
   } else if (input instanceof Date) {
     return new DateMatcher(input) as unknown as Matcher<T>;
+  } else if (input instanceof RegExp) {
+    return new StringPatternMatcher(input) as unknown as Matcher<T>;
   } else if (input instanceof Object) {
     const spec: Record<PropertyKey, Matcher<unknown>> = {};
     for (const entry of Object.entries(input)) {

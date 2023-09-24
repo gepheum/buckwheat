@@ -21,6 +21,7 @@ export type ImplicitMatcher<T> = //
   T extends ReadonlyArray<infer Item> ? ReadonlyArray<AnyMatcher<Item>>
     : T extends ReadonlySet<unknown> ? T
     : T extends ReadonlyMap<infer K, infer V> ? ReadonlyMap<K, AnyMatcher<V>>
+    : T extends string ? (string | RegExp)
     : T extends object ? ImplicitObjectMatcher<T>
     : T;
 

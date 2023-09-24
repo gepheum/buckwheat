@@ -77,6 +77,18 @@ describe("toMatcher()", () => {
     });
   });
 
+  it("accepts RegExp", () => {
+    const matcher: Matcher<string> = toMatcher(new RegExp(/^f/));
+    expect(matcher[MATCHES]("foo")).toMatch({
+      kind: "simple",
+      mismatch: undefined,
+    });
+    expect(matcher[MATCHES]("bar")).toMatch({
+      kind: "simple",
+      mismatch: {},
+    });
+  });
+
   it("accepts Record<K, V>", () => {
     const matcher: Matcher<Record<number, string>> = toMatcher(
       { 3: "(3)" } as Record<number, string>,

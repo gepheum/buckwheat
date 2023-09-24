@@ -8,7 +8,7 @@ import { valueToNode } from "./value_to_node.js";
  */
 export function valueOfUnexpectedTypeToNode(
   value: unknown,
-  expectedType: "array" | "number" | "object" | "Date" | "Map" | "Set",
+  expectedType: string,
 ): SimpleNode {
   const description = describeNode(valueToNode(value));
   const expectedTypeName = typeof value === "object"
