@@ -54,7 +54,9 @@ export class Expecter<T> {
    */
   toBeNear(
     this: Expecter<number>,
-    limit: number, epsilon: number): void {
+    limit: number,
+    epsilon: number,
+  ): void {
     return this.toMatch(near(limit, epsilon));
   }
 

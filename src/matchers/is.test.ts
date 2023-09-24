@@ -17,13 +17,31 @@ describe("IsMatcher", () => {
   });
 
   it("mismatches", () => {
-    const matcher = is({});
-    expect(matcher[MATCHES]({})).toMatch(
+    const matcher = is(true);
+    expect(matcher[MATCHES](false)).toMatch(
       {
         kind: "simple",
-        description: "{}",
+        description: "false",
         mismatch: {
-          expected: "be {}",
+          expected: "be true",
+        },
+      },
+    );
+  });
+
+  it("mismatches with multiline description", () => {
+    const matcher = is([100]);
+    expect(matcher[MATCHES]([])).toMatch(
+      {
+        kind: "simple",
+        description: "[]",
+        mismatch: {
+          expected: [
+            "be a specific reference to:",
+            "  [",
+            "    100,",
+            "  ]",
+          ].join("\n"),
         },
       },
     );
