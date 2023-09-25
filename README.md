@@ -33,7 +33,7 @@ expect(tarzan).toMatch({
 When running this unit test with a framework like Mocha, the console output is:
 
 <pre>
-<span style="color:var(--color-prettylights-syntax-keyword);">AssertionError:</span> the actual value is:
+<span class="pl-k">AssertionError:</span> the actual value is:
 
   {
     name: "Tarzan",
@@ -41,8 +41,8 @@ When running this unit test with a framework like Mocha, the console output is:
     pets: [
       {
         name: "Cheeta",
-        heightInMeters: <span style="color:var(--color-prettylights-syntax-keyword);">1.67</span>,
-        <span style="color:var(--color-prettylights-syntax-constant);">// ^ expected to be near 1.6 ± 0.01</span>
+        heightInMeters: <span class="pl-k">1.67</span>,
+        <span class="pl-c1">// ^ expected to be near 1.6 ± 0.01</span>
       },
     ],
   }
