@@ -33,7 +33,7 @@ expect(tarzan).toMatch({
 When running this unit test with a framework like Mocha, the console output is:
 
 <pre>
-<span class="pl-k">AssertionError:</span> the actual value is:
+<span color="red">AssertionError:</span> the actual value is:
 
   {
     name: "Tarzan",
