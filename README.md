@@ -32,20 +32,20 @@ expect(tarzan).toMatch({
 
 When running this unit test with a framework like Mocha, the console output is:
 
-```
-AssertionError: the actual value is:
+```diff
+  AssertionError: the actual value is:
 
-  {
-    name: "Tarzan",
-    quote: "AAAAaAaAaAyAAAAaAaAaAyAAAAaAaAaA",
-    pets: [
-      {
-        name: "Cheeta",
-        heightInMeters: 1.67,
-        // ^ expected to be near 1.6 ± 0.01
-      },
-    ],
-  }
+    {
+      name: "Tarzan",
+      quote: "AAAAaAaAaAyAAAAaAaAaAyAAAAaAaAaA",
+      pets: [
+        {
+          name: "Cheeta",
+-         heightInMeters: 1.67,
++         // ^ expected to be near 1.6 ± 0.01
+        },
+      ],
+    }
 ```
 
 ## Core principles
