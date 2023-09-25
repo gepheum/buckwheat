@@ -32,7 +32,7 @@ expect(tarzan).toMatch({
 
 When running this unit test with a framework like Mocha, the console output is:
 
-```json
+```
 AssertionError: the actual value is:
 
   {
