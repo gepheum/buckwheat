@@ -63,41 +63,42 @@ This grammar allows you to test a complex object with a single call to `expect`.
 It offers several advantages over testing frameworks which ask you to write one
 `expect` for every property and nested property of the complex object.
 
-Consider this example copied from the Jest [documentation](https://jestjs.io/docs/expect#tohavepropertykeypath-value):
+Consider this example copied from the Jest
+[documentation](https://jestjs.io/docs/expect#tohavepropertykeypath-value):
 
 ```javascript
 // Example Referencing
-expect(houseForSale).toHaveProperty('bath');
-expect(houseForSale).toHaveProperty('bedrooms', 4);
+expect(houseForSale).toHaveProperty("bath");
+expect(houseForSale).toHaveProperty("bedrooms", 4);
 
-expect(houseForSale).not.toHaveProperty('pool');
+expect(houseForSale).not.toHaveProperty("pool");
 
 // Deep referencing using dot notation
-expect(houseForSale).toHaveProperty('kitchen.area', 20);
-expect(houseForSale).toHaveProperty('kitchen.amenities', [
-  'oven',
-  'stove',
-  'washer',
+expect(houseForSale).toHaveProperty("kitchen.area", 20);
+expect(houseForSale).toHaveProperty("kitchen.amenities", [
+  "oven",
+  "stove",
+  "washer",
 ]);
 
-expect(houseForSale).not.toHaveProperty('kitchen.open');
+expect(houseForSale).not.toHaveProperty("kitchen.open");
 
 // Deep referencing using an array containing the keyPath
-expect(houseForSale).toHaveProperty(['kitchen', 'area'], 20);
+expect(houseForSale).toHaveProperty(["kitchen", "area"], 20);
 expect(houseForSale).toHaveProperty(
-  ['kitchen', 'amenities'],
-  ['oven', 'stove', 'washer'],
+  ["kitchen", "amenities"],
+  ["oven", "stove", "washer"],
 );
-expect(houseForSale).toHaveProperty(['kitchen', 'amenities', 0], 'oven');
+expect(houseForSale).toHaveProperty(["kitchen", "amenities", 0], "oven");
 expect(houseForSale).toHaveProperty(
-  'livingroom.amenities[0].couch[0][1].dimensions[0]',
+  "livingroom.amenities[0].couch[0][1].dimensions[0]",
   20,
 );
-expect(houseForSale).toHaveProperty(['kitchen', 'nice.oven']);
-expect(houseForSale).not.toHaveProperty(['kitchen', 'open']);
+expect(houseForSale).toHaveProperty(["kitchen", "nice.oven"]);
+expect(houseForSale).not.toHaveProperty(["kitchen", "open"]);
 
 // Referencing keys with dot in the key itself
-expect(houseForSale).toHaveProperty(['ceiling.height'], 'tall');
+expect(houseForSale).toHaveProperty(["ceiling.height"], "tall");
 ```
 
 This is how you would write a similar unit test with Buckwheat:
@@ -107,22 +108,22 @@ expect(houseForSale).toMatch({
   bath: true,
   bedrooms: 4,
   kitchen: {
-    amenities: ['oven', 'stove', 'washer'],
+    amenities: ["oven", "stove", "washer"],
     area: 20,
-    wallColor: 'white',
-    'nice.oven': true,
+    wallColor: "white",
+    "nice.oven": true,
   },
   livingroom: {
     amenities: [
       {
         couch: [
-          ['large', {dimensions: [20, 20]}],
-          ['small', {dimensions: [10, 10]}],
+          ["large", { dimensions: [20, 20] }],
+          ["small", { dimensions: [10, 10] }],
         ],
       },
     ],
   },
-  'ceiling.height': 2,
+  "ceiling.height": 2,
 });
 ```
 

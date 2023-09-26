@@ -1,5 +1,6 @@
 /** @fileoverview Factory functions returning matchers. */
 
+import { indentText } from "./format.js";
 import { AnyMatcher, Matcher } from "./matcher.js";
 import { ArrayMatcher } from "./matchers/array.js";
 import { ComparesMatcher } from "./matchers/compares.js";
@@ -9,6 +10,7 @@ import { KeyedItemsMatcher } from "./matchers/keyed_items.js";
 import { MapMatcher } from "./matchers/map.js";
 import { NearMatcher } from "./matchers/near.js";
 import { ObjectMatcher } from "./matchers/object.js";
+import { SatisfiesMatcher } from "./matchers/satisfies.js";
 import { SetMatcher } from "./matchers/set.js";
 import { StringPatternMatcher } from "./matchers/string_pattern.js";
 
@@ -162,4 +164,21 @@ export function keyedItems<Item, KeyProperty extends keyof Item>(
     expectedEntries.set(hashable, toMatcher(item as AnyMatcher<unknown>));
   }
   return new KeyedItemsMatcher(keyProperty, expectedEntries, toHashable);
+}
+
+/**
+ * Returns a matcher which verifies that the `predicate` function returns true
+ * when applied to the actual value.
+ *
+ * @param description Short phrase describing values satisfying the condition.
+ *   Must start with an uncapitalized verb. Example: "be even".
+ *
+ * @example
+ * expect(24).toMatch(satisfies((n) => n % 2 === 0, "be even"));
+ */
+export function satisfies<T>(
+  predicate: (input: T) => boolean,
+  description: string,
+): Matcher<T> {
+  return new SatisfiesMatcher(predicate, description);
 }
