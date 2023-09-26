@@ -51,6 +51,14 @@ export function valueToNode(
           .join("");
         return simpleNode(`[\n${contents}].join("\\n")`);
       }
+    } else if (value instanceof RegExp) {
+      return simpleNode(
+        String(value).startsWith("/")
+          ? String(value)
+          // In some Javascript environments, calling toString() on a RegExp
+          // obtained from the RegExpr constructor returns "RegExp {}".
+          : `new RegExpr(${JSON.stringify(value.source)})`,
+      );
     } else if (typeof value === "bigint") {
       return simpleNode(`BigInt(${JSON.stringify(String(value))})`);
     } else if (

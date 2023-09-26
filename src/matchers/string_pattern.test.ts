@@ -4,28 +4,57 @@ import { Matcher, MATCHES } from "../matcher.js";
 import { StringPatternMatcher } from "./string_pattern.js";
 
 describe("StringPatternMatcher", () => {
-  it("matches", () => {
-    const matcher = new StringPatternMatcher(/^f/);
-    expect(matcher[MATCHES]("foo")).toMatch(
-      {
-        kind: "simple",
-        description: '"foo"',
-        mismatch: undefined,
-      },
-    );
+  describe("matches", () => {
+    it("string", () => {
+      const matcher = new StringPatternMatcher(/^f/);
+      expect(matcher[MATCHES]("foo")).toMatch(
+        {
+          kind: "simple",
+          description: '"foo"',
+          mismatch: undefined,
+        },
+      );
+    });
+
+    it("RegExp", () => {
+      const re = /^f/;
+      const matcher = new StringPatternMatcher(re);
+      expect(matcher[MATCHES](re)).toMatch(
+        {
+          kind: "simple",
+          description: "/^f/",
+          mismatch: undefined,
+        },
+      );
+    });
   });
 
-  it("mismatches", () => {
-    const matcher = new StringPatternMatcher(/^f/);
-    expect(matcher[MATCHES]("oof")).toMatch(
-      {
-        kind: "simple",
-        description: '"oof"',
-        mismatch: {
-          expected: "match /^f/",
+  describe("mismatches", () => {
+    it("string", () => {
+      const matcher = new StringPatternMatcher(/^f/);
+      expect(matcher[MATCHES]("oof")).toMatch(
+        {
+          kind: "simple",
+          description: '"oof"',
+          mismatch: {
+            expected: "match /^f/",
+          },
         },
-      },
-    );
+      );
+    });
+
+    it("RegExp", () => {
+      const matcher = new StringPatternMatcher(/^f/);
+      expect(matcher[MATCHES](/^g/)).toMatch(
+        {
+          kind: "simple",
+          description: "/^g/",
+          mismatch: {
+            expected: "be a specific reference to /^f/",
+          },
+        },
+      );
+    });
   });
 
   it("#toString()", () => {

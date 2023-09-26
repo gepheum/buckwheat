@@ -22,7 +22,7 @@ export function toMatcher<Item>(input: ReadonlySet<Item>): Matcher<Set<Item>>;
 export function toMatcher<K, V, M extends AnyMatcher<V>>(
   input: ReadonlyMap<K, M>,
 ): Matcher<Map<K, V>>;
-export function toMatcher(input: RegExp): Matcher<string>;
+export function toMatcher(input: RegExp): Matcher<string | RegExp>;
 export function toMatcher<K extends PropertyKey, V, M extends AnyMatcher<V>>(
   input: Record<K, M>,
 ): Matcher<Record<K, V>>;

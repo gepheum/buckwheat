@@ -2,13 +2,19 @@ import { describeValue } from "../describe_node.js";
 import { Matcher, MATCHES } from "../matcher.js";
 import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { SimpleNode, ValueNode } from "../value_node.js";
+import { IsMatcher } from "./is.js";
 
-export class StringPatternMatcher extends Matcher<string> {
+export class StringPatternMatcher extends Matcher<string | RegExp> {
   constructor(private readonly expectedPattern: RegExp) {
     super();
   }
 
-  [MATCHES](input: string): ValueNode {
+  [MATCHES](input: string | RegExp): ValueNode {
+    if (input instanceof RegExp) {
+      // Verify that input and the expected RegExp are the same value according
+      // to `Object.is`.
+      return new IsMatcher(this.expectedPattern)[MATCHES](input);
+    }
     if (typeof input !== "string") {
       return valueOfUnexpectedTypeToNode(input, "string");
     }
@@ -26,11 +32,6 @@ export class StringPatternMatcher extends Matcher<string> {
   }
 
   toString() {
-    const { expectedPattern } = this;
-    return String(expectedPattern).startsWith("/")
-      ? String(expectedPattern)
-      // In some Javascript environments, calling toString() on a RegExp
-      // obtained from the RegExpr constructor returns "RegExp {}".
-      : `new RegExpr(${JSON.stringify(expectedPattern.source)})`;
+    return describeValue(this.expectedPattern);
   }
 }

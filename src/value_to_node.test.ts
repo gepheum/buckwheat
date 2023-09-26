@@ -8,6 +8,7 @@ describe("valueToNode()", () => {
     expect(valueToNode("foo")).toMatch({
       kind: "simple",
       description: '"foo"',
+      mismatch: undefined,
     });
   });
 
@@ -67,6 +68,13 @@ describe("valueToNode()", () => {
     expect(valueToNode(new Date(1694467279837))).toMatch({
       kind: "simple",
       description: 'Date.parse("2023-09-11T21:21:19.837Z")',
+    });
+  });
+
+  it("works with regexp", () => {
+    expect(valueToNode(/f/)).toMatch({
+      kind: "simple",
+      description: '/f/',
     });
   });
 
