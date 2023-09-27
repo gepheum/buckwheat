@@ -48,7 +48,7 @@ When running this unit test with a framework like Mocha, the console output is:
     }
 ```
 
-## Core principles
+## Key features
 
 ### Compose matchers to test complex objects
 
