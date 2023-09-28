@@ -387,7 +387,7 @@ instead of a `T`. This allows more errors to be detected at compile-time.
 
 ### The better option than `toEqual` has weaker type safety
 
-When testing objects we think it's better to only look at properties explicitly
+When testing objects, we think it's better to only look at properties explicitly
 set in the matcher than to use deep object equality. The reasons are outlined
 [here](#only-test-fields-explicitly-set-in-the-matcher). So Earl's
 [`toHaveSubset`](https://earl.fun/api/api-reference.html#tohavesubset-this-validators-object-subset-subset-void)
