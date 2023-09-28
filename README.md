@@ -406,8 +406,8 @@ expect(doggy).toHaveSubset({
 
 ## Contributions
 
-Are welcome! Buckwheat is still very young and lacks many features that other assertion
-libraries have, but it was written with extensibility in mind.
+... are welcome! Buckwheat is still very young and lacks many features that
+other assertion libraries have, but it was written with extensibility in mind.
 
 ## Authors
 
