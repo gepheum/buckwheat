@@ -7,6 +7,7 @@ import { near } from "./matchers.js";
 interface Pet {
   name: string;
   heightInMeters: number;
+  picture: string;
 }
 
 interface User {
@@ -18,19 +19,20 @@ interface User {
 }
 
 describe("examples", () => {
-  it.skip("top-level example", () => {
-    const tarzan: User = {
-      userId: 123,
-      name: "Tarzan",
-      quote: "AAAAaAaAaAyAAAAaAaAaAyAAAAaAaAaA",
-      pets: [
-        {
-          name: "Cheeta",
-          heightInMeters: 1.67,
-        },
-      ],
-    };
+  const tarzan: User = {
+    userId: 123,
+    name: "Tarzan",
+    quote: "AAAAaAaAaAyAAAAaAaAaAyAAAAaAaAaA",
+    pets: [
+      {
+        name: "Cheeta",
+        heightInMeters: 1.67,
+        picture: "🐒",
+      },
+    ],
+  };
 
+  it.skip("top-level example", () => {
     expect(tarzan).toMatch({
       name: "Tarzan",
       quote: /^A/, // must start with the letter A
@@ -48,5 +50,9 @@ describe("examples", () => {
       // Will fail if Tarzan has a social security number.
       ssn: undefined,
     });
+  });
+
+  it.skip("copy-paste example", () => {
+    expect([tarzan]).toMatch([]);
   });
 });

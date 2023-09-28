@@ -74,7 +74,7 @@ describe("valueToNode()", () => {
   it("works with regexp", () => {
     expect(valueToNode(/f/)).toMatch({
       kind: "simple",
-      description: '/f/',
+      description: "/f/",
     });
   });
 

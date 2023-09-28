@@ -135,16 +135,18 @@ export function compares(
  * expect(
  *   [jane, john]
  * ).toMatch(
- *   "userId",
- *   [
- *     {
- *       userId: 222,
- *     },
- *     {
- *       userId: 111,
- *       name: "Jane",
- *     },
- *   ],
+ *   keyedItems(
+ *     "userId",
+ *     [
+ *       {
+ *         userId: 222,
+ *       },
+ *       {
+ *         userId: 111,
+ *         name: "Jane",
+ *       },
+ *     ],
+ *   )
  * );
  */
 export function keyedItems<Item, KeyProperty extends keyof Item>(
