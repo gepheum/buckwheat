@@ -160,6 +160,7 @@ Running this failing unit test will output:
 -         {
 -           name: "Cheeta",
 -           heightInMeters: 1.67,
+-           picture: "🐒",
 -         },
 -       ],
 -     },
@@ -180,6 +181,7 @@ expect(tarzan).toMatch(
       {
         name: "Cheeta",
         heightInMeters: 1.67,
+        picture: "🐒",
       },
     ],
   },
@@ -326,7 +328,7 @@ expect(tarzan).toMatch({
       },
       {
         name: "Cheeta",
-        picture: /🐒|🙉|🙈|🙊/,
+        picture: /^(🐒|🙉|🙈|🙊)$/,
       },
     ],
   ),
@@ -373,7 +375,7 @@ expect(doggy).toEqual({
 });
 ```
 
-This is justified by the fact that `toEqual()` expects a `T`, but it's _not
+It is justified by the fact that `toEqual()` expects a `T`, but it's _not
 really_ a `T` because the value of each property within the object can be a
 matcher. If `closeTo()` returned a `Matcher<number>`, the compiler would not
 allow us to assign the matcher to a numeric field. By making the return type
