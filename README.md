@@ -172,20 +172,18 @@ Copy the value in red into `toMatch()`, remove the square brackets around
 `tarzan` and you will end up with a working unit test:
 
 ```typescript
-expect(tarzan).toMatch(
-  {
-    userId: 123,
-    name: "Tarzan",
-    quote: "AAAAaAaAaAyAAAAaAaAaAyAAAAaAaAaA",
-    pets: [
-      {
-        name: "Cheeta",
-        heightInMeters: 1.67,
-        picture: "🐒",
-      },
-    ],
-  },
-);
+expect(tarzan).toMatch({
+  userId: 123,
+  name: "Tarzan",
+  quote: "AAAAaAaAaAyAAAAaAaAaAyAAAAaAaAaA",
+  pets: [
+    {
+      name: "Cheeta",
+      heightInMeters: 1.67,
+      picture: "🐒",
+    },
+  ],
+});
 ```
 
 Although this practice might seem heretic because you are more likely to let
