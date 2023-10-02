@@ -21,10 +21,11 @@ export type ImplicitMatcher<T> = //
   T extends ReadonlyArray<infer Item> ? ReadonlyArray<AnyMatcher<Item>>
     : T extends ReadonlySet<unknown> ? T
     : T extends ReadonlyMap<infer K, infer V> ? ReadonlyMap<K, AnyMatcher<V>>
-    : T extends string ? (string | RegExp)
+    : T extends string ? (T | RegExp)
     : T extends object ? ImplicitObjectMatcher<T>
     : T;
 
 export type ImplicitObjectMatcher<T> = T extends any
   ? { [Property in keyof T]?: AnyMatcher<T[Property]> }
   : never;
+ 
