@@ -25,6 +25,6 @@ export type ImplicitMatcher<T> = //
     : T extends object ? ImplicitObjectMatcher<T>
     : T;
 
-export type ImplicitObjectMatcher<T> = {
-  [Property in keyof T]?: AnyMatcher<T[Property]>;
-};
+export type ImplicitObjectMatcher<T> = T extends any
+  ? { [Property in keyof T]?: AnyMatcher<T[Property]> }
+  : never;

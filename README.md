@@ -115,8 +115,8 @@ make the compiler unhappy.
 expect(tarzan).toMatch({
   pets: [
     {
-      name: near(1.6, 0.01),  // COMPILER ERROR: expects a string matcher
-      height: 1.67,  // COMPILER ERROR: did you mean `heightInMeters'?
+      name: near(1.6, 0.01), // COMPILER ERROR: expects a string matcher
+      height: 1.67, // COMPILER ERROR: did you mean `heightInMeters'?
     },
   ],
 });
@@ -245,7 +245,8 @@ export function is<T>(expected: T): Matcher<T>;
 ```
 
 Returns a matcher which verifies that the actual value and `expected` are the
-same value, according to [`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#description).
+same value, according to
+[`Object.is`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is#description).
 
 Example:
 
@@ -382,8 +383,10 @@ allow us to assign the matcher to a numeric field. By making the return type
 `never`, the compiler lets us assign the matcher to a numeric field, but also
 unfortunately to any non-numeric field.
 
-Buckwheat uses [mapped types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
-and [conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+Buckwheat uses
+[mapped types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+and
+[conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 to work around this problem. The `toMatch()` method expects an `AnyMatcher<T>`
 instead of a `T`. This allows more errors to be detected at compile-time.
 
@@ -402,7 +405,7 @@ import { expect } from "earl";
 
 // This too compiles with Earl but probably should not.
 expect(doggy).toHaveSubset({
-  naem: "Waffles",  // `name` is misspelled
+  naem: "Waffles", // `name` is misspelled
 });
 ```
 
