@@ -52,11 +52,7 @@ export class Expecter<T> {
    * Verifies that the absolute difference between the actual value and `limit`
    * is at most `epsilon`. Throws an assertion error otherwise.
    */
-  toBeNear(
-    this: Expecter<number>,
-    limit: number,
-    epsilon: number,
-  ): void {
+  toBeNear(this: Expecter<number>, limit: number, epsilon: number): void {
     return this.toMatch(near(limit, epsilon));
   }
 

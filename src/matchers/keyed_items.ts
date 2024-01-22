@@ -4,8 +4,10 @@ import { Matcher, MATCHES } from "../matcher.js";
 import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { ArrayNode, ValueNode } from "../value_node.js";
 
-export class KeyedItemsMatcher<Item, KeyProperty extends keyof Item>
-  extends Matcher<ReadonlyArray<Item>> {
+export class KeyedItemsMatcher<
+  Item,
+  KeyProperty extends keyof Item,
+> extends Matcher<ReadonlyArray<Item>> {
   constructor(
     private readonly keyProperty: KeyProperty,
     private readonly expectedEntries: ReadonlyMap<unknown, Matcher<Item>>,

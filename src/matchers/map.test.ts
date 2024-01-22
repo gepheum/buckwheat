@@ -16,29 +16,27 @@ describe("MapMatcher", () => {
       ["k1", 1],
       ["k2", 2],
     ]);
-    expect(matcher[MATCHES](actual)).toMatch(
-      {
-        kind: "array",
-        items: [
-          {
-            kind: "present",
-            node: {
-              kind: "simple",
-              description: "1",
-              mismatch: undefined,
-            },
+    expect(matcher[MATCHES](actual)).toMatch({
+      kind: "array",
+      items: [
+        {
+          kind: "present",
+          node: {
+            kind: "simple",
+            description: "1",
+            mismatch: undefined,
           },
-          {
-            kind: "present",
-            node: {
-              kind: "simple",
-              description: "2",
-              mismatch: undefined,
-            },
+        },
+        {
+          kind: "present",
+          node: {
+            kind: "simple",
+            description: "2",
+            mismatch: undefined,
           },
-        ],
-      },
-    );
+        },
+      ],
+    });
   });
 
   it("mismatches", () => {
@@ -52,38 +50,28 @@ describe("MapMatcher", () => {
       ["k1", 1],
       ["k3", 3],
     ]);
-    expect(matcher[MATCHES](actual)).toMatch(
-      {
-        kind: "array",
-        items: [
-          {
-            kind: "present",
-            node: {
-              kind: "simple",
-              description: "1",
-              mismatch: undefined,
-            },
+    expect(matcher[MATCHES](actual)).toMatch({
+      kind: "array",
+      items: [
+        {
+          kind: "present",
+          node: {
+            kind: "simple",
+            description: "1",
+            mismatch: undefined,
           },
-          {
-            kind: "extra",
-            description: [
-              "[",
-              '  "k3",',
-              "  3,",
-              "]",
-            ].join("\n"),
-            explanation: "^ unexpected entry",
-          },
-          {
-            kind: "missing",
-            explanation: [
-              "Missing key:",
-              '  "k2"',
-            ].join("\n"),
-          },
-        ],
-      },
-    );
+        },
+        {
+          kind: "extra",
+          description: ["[", '  "k3",', "  3,", "]"].join("\n"),
+          explanation: "^ unexpected entry",
+        },
+        {
+          kind: "missing",
+          explanation: ["Missing key:", '  "k2"'].join("\n"),
+        },
+      ],
+    });
   });
 
   it("can handle values of unexpected type", () => {

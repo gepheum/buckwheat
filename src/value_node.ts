@@ -2,11 +2,7 @@
  * Result of comparing the actual value passed to `expect` against a matcher.
  * Mismatches are stored within sub-nodes.
  */
-export type ValueNode =
-  | SimpleNode
-  | ArrayNode
-  | ObjectNode
-  | Ellipsis;
+export type ValueNode = SimpleNode | ArrayNode | ObjectNode | Ellipsis;
 
 /** A value without sub-nodes. */
 export interface SimpleNode {

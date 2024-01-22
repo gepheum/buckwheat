@@ -33,8 +33,10 @@ export function describeNode(
             case "present":
               return describeNode(item.node, ",");
             case "extra":
-              return `${makeRed(item.description)},\n` +
-                makeCyan(commentOut(item.explanation));
+              return (
+                `${makeRed(item.description)},\n` +
+                makeCyan(commentOut(item.explanation))
+              );
             case "missing":
               return makeRed(commentOut(item.explanation));
           }
@@ -70,7 +72,7 @@ export function describeValue(value: unknown) {
 /** Returns a possibly-quoted description of the given property. */
 export function describeProperty(property: unknown) {
   return typeof property === "string" &&
-      /^[A-Za-z_$][0-9A-Za-z_$]*$/.test(property)
+    /^[A-Za-z_$][0-9A-Za-z_$]*$/.test(property)
     ? property
     : JSON.stringify(property);
 }

@@ -46,23 +46,22 @@ export function valueToNode(
       if (lines.length <= 1) {
         return simpleNode(JSON.stringify(value));
       } else {
-        const contents = lines
-          .map((l) => `  ${JSON.stringify(l)},\n`)
-          .join("");
+        const contents = lines.map((l) => `  ${JSON.stringify(l)},\n`).join("");
         return simpleNode(`[\n${contents}].join("\\n")`);
       }
     } else if (value instanceof RegExp) {
       return simpleNode(
         String(value).startsWith("/")
           ? String(value)
-          // In some Javascript environments, calling toString() on a RegExp
-          // obtained from the RegExpr constructor returns "RegExp {}".
-          : `new RegExpr(${JSON.stringify(value.source)})`,
+          : // In some Javascript environments, calling toString() on a RegExp
+            // obtained from the RegExpr constructor returns "RegExp {}".
+            `new RegExpr(${JSON.stringify(value.source)})`,
       );
     } else if (typeof value === "bigint") {
       return simpleNode(`BigInt(${JSON.stringify(String(value))})`);
     } else if (
-      value instanceof Object && !(REPRESENT_AS_SIMPLE_NODE in value)
+      value instanceof Object &&
+      !(REPRESENT_AS_SIMPLE_NODE in value)
     ) {
       return objectToNode(value as Record<PropertyKey, unknown>, inProcess);
     } else {

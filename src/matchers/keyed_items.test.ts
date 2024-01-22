@@ -8,7 +8,10 @@ interface ComplexKey {
 }
 
 class Item {
-  constructor(readonly key: string | ComplexKey, readonly n: number) {}
+  constructor(
+    readonly key: string | ComplexKey,
+    readonly n: number,
+  ) {}
 }
 
 describe("KeyedItemsMatcher", () => {
@@ -17,10 +20,7 @@ describe("KeyedItemsMatcher", () => {
       { key: "k1", n: 1 },
       { key: "k2", n: 2 },
     ]);
-    const actual = [
-      new Item("k2", 2),
-      new Item("k1", 1),
-    ];
+    const actual = [new Item("k2", 2), new Item("k1", 1)];
     expect(matcher[MATCHES](actual)).toMatch({
       kind: "array",
       items: [
@@ -49,9 +49,7 @@ describe("KeyedItemsMatcher", () => {
       { key: "k1", n: 1 },
       { key: "k2", n: 2 },
     ]);
-    const actual = [
-      new Item("k2", 2),
-    ];
+    const actual = [new Item("k2", 2)];
     expect(matcher[MATCHES](actual)).toMatch({
       kind: "array",
       items: [
@@ -77,13 +75,8 @@ describe("KeyedItemsMatcher", () => {
   });
 
   it("mismatches because extra item", () => {
-    const matcher: Matcher<Item[]> = keyedItems("key", [
-      { key: "k2", n: 2 },
-    ]);
-    const actual = [
-      new Item("k1", 1),
-      new Item("k2", 2),
-    ];
+    const matcher: Matcher<Item[]> = keyedItems("key", [{ key: "k2", n: 2 }]);
+    const actual = [new Item("k1", 1), new Item("k2", 2)];
     expect(matcher[MATCHES](actual)).toMatch({
       kind: "array",
       items: [
@@ -115,33 +108,32 @@ describe("KeyedItemsMatcher", () => {
   });
 
   it("uses toMatchable if provided", () => {
-    const matcher: Matcher<Item[]> = keyedItems("key", [
-      { key: { key: "k1" }, n: 1 },
-      { key: { key: "k2" }, n: 2 },
-    ], (key) => (key as ComplexKey).key);
-    const actual = [
-      new Item({ key: "k2" }, 2),
-      new Item({ key: "k1" }, 1),
-    ];
-    expect(matcher[MATCHES](actual)).toMatch(
-      {
-        kind: "array",
-        items: [
-          {
-            kind: "present",
-            node: {
-              kind: "object",
-            },
-          },
-          {
-            kind: "present",
-            node: {
-              kind: "object",
-            },
-          },
-        ],
-      },
+    const matcher: Matcher<Item[]> = keyedItems(
+      "key",
+      [
+        { key: { key: "k1" }, n: 1 },
+        { key: { key: "k2" }, n: 2 },
+      ],
+      (key) => (key as ComplexKey).key,
     );
+    const actual = [new Item({ key: "k2" }, 2), new Item({ key: "k1" }, 1)];
+    expect(matcher[MATCHES](actual)).toMatch({
+      kind: "array",
+      items: [
+        {
+          kind: "present",
+          node: {
+            kind: "object",
+          },
+        },
+        {
+          kind: "present",
+          node: {
+            kind: "object",
+          },
+        },
+      ],
+    });
   });
 
   it("#toString()", () => {
@@ -187,10 +179,7 @@ describe("KeyedItemsMatcher", () => {
       { key: "k1", n: 1 },
       { key: "k2", n: 2 },
     ]);
-    const actual = [
-      new Item("k1", 2),
-      new Item("k1", 1),
-    ];
+    const actual = [new Item("k1", 2), new Item("k1", 1)];
     expect(matcher[MATCHES](actual)).toMatch({
       kind: "array",
       items: [

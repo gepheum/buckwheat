@@ -34,9 +34,9 @@ export class SatisfiesMatcher<T> extends Matcher<T> {
     }
     const { description } = this;
     return /[\r\n]/.test(description)
-      ? `satisfies(\n  ${predicateName},\n${
-        indentText(describeValue(description))
-      }\n)`
+      ? `satisfies(\n  ${predicateName},\n${indentText(
+          describeValue(description),
+        )}\n)`
       : `satisfies(${predicateName}, ${describeValue(description)})`;
   }
 }

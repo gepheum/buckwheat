@@ -12,9 +12,8 @@ export class IsMatcher<T> extends Matcher<T> {
     let mismatch: SimpleNode.Mismatch | undefined;
     const { expected } = this;
     if (!Object.is(input, this.expected)) {
-      const be = typeof expected === "object"
-        ? "be a specific reference to"
-        : "be";
+      const be =
+        typeof expected === "object" ? "be a specific reference to" : "be";
       const description = describeValue(this.expected);
       const multiline = /[\r\n]/.test(description);
       mismatch = {

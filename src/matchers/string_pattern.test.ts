@@ -7,53 +7,45 @@ describe("StringPatternMatcher", () => {
   describe("matches", () => {
     it("string", () => {
       const matcher = new StringPatternMatcher(/^f/);
-      expect(matcher[MATCHES]("foo")).toMatch(
-        {
-          kind: "simple",
-          description: '"foo"',
-          mismatch: undefined,
-        },
-      );
+      expect(matcher[MATCHES]("foo")).toMatch({
+        kind: "simple",
+        description: '"foo"',
+        mismatch: undefined,
+      });
     });
 
     it("RegExp", () => {
       const re = /^f/;
       const matcher = new StringPatternMatcher(re);
-      expect(matcher[MATCHES](re)).toMatch(
-        {
-          kind: "simple",
-          description: "/^f/",
-          mismatch: undefined,
-        },
-      );
+      expect(matcher[MATCHES](re)).toMatch({
+        kind: "simple",
+        description: "/^f/",
+        mismatch: undefined,
+      });
     });
   });
 
   describe("mismatches", () => {
     it("string", () => {
       const matcher = new StringPatternMatcher(/^f/);
-      expect(matcher[MATCHES]("oof")).toMatch(
-        {
-          kind: "simple",
-          description: '"oof"',
-          mismatch: {
-            expected: "match /^f/",
-          },
+      expect(matcher[MATCHES]("oof")).toMatch({
+        kind: "simple",
+        description: '"oof"',
+        mismatch: {
+          expected: "match /^f/",
         },
-      );
+      });
     });
 
     it("RegExp", () => {
       const matcher = new StringPatternMatcher(/^f/);
-      expect(matcher[MATCHES](/^g/)).toMatch(
-        {
-          kind: "simple",
-          description: "/^g/",
-          mismatch: {
-            expected: "be a specific reference to /^f/",
-          },
+      expect(matcher[MATCHES](/^g/)).toMatch({
+        kind: "simple",
+        description: "/^g/",
+        mismatch: {
+          expected: "be a specific reference to /^f/",
         },
-      );
+      });
     });
   });
 

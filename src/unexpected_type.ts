@@ -11,9 +11,10 @@ export function valueOfUnexpectedTypeToNode(
   expectedType: string,
 ): SimpleNode {
   const description = describeNode(valueToNode(value));
-  const expectedTypeName = typeof value === "object"
-    ? Object.getPrototypeOf(value).constructor.name
-    : typeof value;
+  const expectedTypeName =
+    typeof value === "object"
+      ? Object.getPrototypeOf(value).constructor.name
+      : typeof value;
   const actuallyIs = `actually is ${withArticle(expectedTypeName)}`;
   return {
     kind: "simple",

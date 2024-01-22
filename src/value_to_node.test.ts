@@ -15,13 +15,9 @@ describe("valueToNode()", () => {
   it("works with multiline string", () => {
     expect(valueToNode("foo\nbar\n")).toMatch({
       kind: "simple",
-      description: [
-        "[",
-        '  "foo",',
-        '  "bar",',
-        '  "",',
-        '].join("\\n")',
-      ].join("\n"),
+      description: ["[", '  "foo",', '  "bar",', '  "",', '].join("\\n")'].join(
+        "\n",
+      ),
     });
   });
 
@@ -197,7 +193,10 @@ describe("valueToNode()", () => {
 });
 
 class Point {
-  constructor(private readonly x: number, private readonly y: number) {}
+  constructor(
+    private readonly x: number,
+    private readonly y: number,
+  ) {}
 
   toString(): string {
     return "This is a:\nPoint";

@@ -30,9 +30,11 @@ export class ComparesMatcher extends Matcher<number | bigint> {
         ok = input >= this.limit;
         break;
     }
-    const mismatch: SimpleNode.Mismatch | undefined = ok ? undefined : {
-      expected: `be ${this.operator} ${this.limit}`,
-    };
+    const mismatch: SimpleNode.Mismatch | undefined = ok
+      ? undefined
+      : {
+          expected: `be ${this.operator} ${this.limit}`,
+        };
     return {
       kind: "simple",
       description: describeValue(input),

@@ -20,14 +20,12 @@ describe("valueOfUnexpectedTypeToNode()", () => {
         expected: "be an object, actually is a boolean",
       },
     });
-    expect(valueOfUnexpectedTypeToNode(new Point(), "number")).toMatch(
-      {
-        kind: "simple",
-        description: "{}",
-        mismatch: {
-          expected: "be a number, actually is a Point",
-        },
+    expect(valueOfUnexpectedTypeToNode(new Point(), "number")).toMatch({
+      kind: "simple",
+      description: "{}",
+      mismatch: {
+        expected: "be a number, actually is a Point",
       },
-    );
+    });
   });
 });

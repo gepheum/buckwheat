@@ -24,10 +24,7 @@ describe("toMatcher()", () => {
     const matcher: Matcher<number[]> = toMatcher([new IsMatcher(7), 8]);
     expect(matcher[MATCHES]([3])).toMatch({
       kind: "array",
-      items: [
-        {},
-        {},
-      ],
+      items: [{}, {}],
     });
   });
 
@@ -35,9 +32,7 @@ describe("toMatcher()", () => {
     const matcher: Matcher<Set<number>> = toMatcher(new Set([3]));
     expect(matcher[MATCHES](new Set([3]))).toMatch({
       kind: "array",
-      items: [
-        {},
-      ],
+      items: [{}],
     });
   });
 
@@ -47,9 +42,7 @@ describe("toMatcher()", () => {
     );
     expect(matcher[MATCHES](new Map([[3, "(3)"]]))).toMatch({
       kind: "array",
-      items: [
-        {},
-      ],
+      items: [{}],
     });
   });
 
@@ -59,9 +52,7 @@ describe("toMatcher()", () => {
     );
     expect(matcher[MATCHES](new Map([[3, "(3)"]]))).toMatch({
       kind: "array",
-      items: [
-        {},
-      ],
+      items: [{}],
     });
   });
 
@@ -90,9 +81,9 @@ describe("toMatcher()", () => {
   });
 
   it("accepts Record<K, V>", () => {
-    const matcher: Matcher<Record<number, string>> = toMatcher(
-      { 3: "(3)" } as Record<number, string>,
-    );
+    const matcher: Matcher<Record<number, string>> = toMatcher({
+      3: "(3)",
+    } as Record<number, string>);
     expect(matcher[MATCHES]({ 3: "(3)" })).toMatch({
       kind: "object",
       record: {
@@ -102,9 +93,9 @@ describe("toMatcher()", () => {
   });
 
   it("accepts Record<K, Matcher<V>>", () => {
-    const matcher: Matcher<Record<number, string>> = toMatcher(
-      { 3: is("(3)") } as Record<number, Matcher<string>>,
-    );
+    const matcher: Matcher<Record<number, string>> = toMatcher({
+      3: is("(3)"),
+    } as Record<number, Matcher<string>>);
     expect(matcher[MATCHES]({ 3: "(3)" })).toMatch({
       kind: "object",
       record: {
