@@ -1,5 +1,5 @@
-import type { ValueNode } from "./value_node.ts";
 import { commentOut, indentText, makeCyan, makeRed } from "./format.js";
+import type { ValueNode } from "./value_node.ts";
 import { valueToNode } from "./value_to_node.js";
 
 /**

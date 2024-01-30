@@ -1,8 +1,8 @@
-import { describe, it } from "mocha";
 import { expect } from "./expect.js";
-import { IsMatcher } from "./matchers/is.js";
+import { AnyMatcher, MATCHES, Matcher } from "./matcher.js";
 import { is, toMatcher } from "./matchers.js";
-import { AnyMatcher, Matcher, MATCHES } from "./matcher.js";
+import { IsMatcher } from "./matchers/is.js";
+import { describe, it } from "mocha";
 
 describe("toMatcher()", () => {
   it("returns Matcher as-is", () => {

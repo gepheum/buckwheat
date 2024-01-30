@@ -1,6 +1,6 @@
-import { describe, it } from "mocha";
 import { AssertionError, expect } from "./expect.js";
 import { is } from "./matchers.js";
+import { describe, it } from "mocha";
 
 describe("expect()", () => {
   describe("toBe()", () => {

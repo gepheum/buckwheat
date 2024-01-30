@@ -1,4 +1,3 @@
-import { describe, it } from "mocha";
 import { expect } from "./expect.js";
 import {
   commentOut,
@@ -8,6 +7,7 @@ import {
   prefixEachLine,
   prefixEachLinePastFirst,
 } from "./format.js";
+import { describe, it } from "mocha";
 
 describe("prefixEachLinePastFirst()", () => {
   it("works with single-line string", () => {

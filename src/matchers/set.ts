@@ -1,6 +1,6 @@
 import { describeValue } from "../describe_node.js";
 import { indentText } from "../format.js";
-import { Matcher, MATCHES } from "../matcher.js";
+import { MATCHES, Matcher } from "../matcher.js";
 import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { ArrayNode, ValueNode } from "../value_node.js";
 

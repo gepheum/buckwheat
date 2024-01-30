@@ -1,7 +1,7 @@
-import { describe, it } from "mocha";
 import { expect } from "../expect.js";
 import { MATCHES } from "../matcher.js";
 import { is } from "../matchers.js";
+import { describe, it } from "mocha";
 
 describe("IsMatcher", () => {
   it("matches", () => {

@@ -1,5 +1,4 @@
 /** @fileoverview Factory functions returning matchers. */
-
 import { indentText } from "./format.js";
 import { AnyMatcher, Matcher } from "./matcher.js";
 import { ArrayMatcher } from "./matchers/array.js";

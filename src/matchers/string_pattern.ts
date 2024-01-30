@@ -1,5 +1,5 @@
 import { describeValue } from "../describe_node.js";
-import { Matcher, MATCHES } from "../matcher.js";
+import { MATCHES, Matcher } from "../matcher.js";
 import { valueOfUnexpectedTypeToNode } from "../unexpected_type.js";
 import { SimpleNode, ValueNode } from "../value_node.js";
 import { IsMatcher } from "./is.js";

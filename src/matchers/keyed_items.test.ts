@@ -1,7 +1,7 @@
-import { describe, it } from "mocha";
 import { expect } from "../expect.js";
-import { Matcher, MATCHES } from "../matcher.js";
+import { MATCHES, Matcher } from "../matcher.js";
 import { keyedItems } from "../matchers.js";
+import { describe, it } from "mocha";
 
 interface ComplexKey {
   key: string;

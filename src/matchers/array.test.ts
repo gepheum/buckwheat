@@ -1,8 +1,8 @@
-import { describe, it } from "mocha";
 import { expect } from "../expect.js";
-import { ArrayMatcher } from "./array.js";
+import { MATCHES, Matcher } from "../matcher.js";
 import { compares, is } from "../matchers.js";
-import { Matcher, MATCHES } from "../matcher.js";
+import { ArrayMatcher } from "./array.js";
+import { describe, it } from "mocha";
 
 describe("ArrayMatcher", () => {
   it("works with missing items", () => {

@@ -1,6 +1,6 @@
-import { describe, it } from "mocha";
 import { expect } from "./expect.js";
 import { valueOfUnexpectedTypeToNode } from "./unexpected_type.js";
+import { describe, it } from "mocha";
 
 class Point {}
 

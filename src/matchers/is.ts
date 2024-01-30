@@ -1,6 +1,6 @@
 import { describeValue } from "../describe_node.js";
 import { indentText } from "../format.js";
-import { Matcher, MATCHES } from "../matcher.js";
+import { MATCHES, Matcher } from "../matcher.js";
 import { SimpleNode, ValueNode } from "../value_node.js";
 
 export class IsMatcher<T> extends Matcher<T> {

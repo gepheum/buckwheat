@@ -1,5 +1,5 @@
-import { REPRESENT_AS_SIMPLE_NODE } from "./value_to_node.js";
 import { ValueNode } from "./value_node.js";
+import { REPRESENT_AS_SIMPLE_NODE } from "./value_to_node.js";
 
 /**
  * A value which can be converted to a `Matcher<T>`, for example a `T` or a

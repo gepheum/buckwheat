@@ -1,8 +1,7 @@
 /** @fileoverview Examples to copy to README.md. */
-
-import { describe, it } from "mocha";
 import { expect } from "./expect.js";
 import { near } from "./matchers.js";
+import { describe, it } from "mocha";
 
 interface Pet {
   name: string;

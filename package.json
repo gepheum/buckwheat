@@ -19,15 +19,25 @@
     "unit",
     "tdd"
   ],
+  "homepage": "https://github.com/gepheum/buckwheat#readme",
+  "bugs": {
+    "url": "https://github.com/gepheum/buckwheat/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gepheum/buckwheat.git"
+  },
+  "license": "MIT",
+  "author": "Tyler Fibonacci <gepheum@gmail.com>",
   "type": "module",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     }
   },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "files": [
     "dist/cjs",
     "dist/esm",
@@ -38,20 +48,12 @@
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc -p ./tsconfig.cjs.json && cp static/package-cjs.json dist/cjs/package.json",
     "build:esm": "tsc -p ./tsconfig.esm.json && cp static/package-esm.json dist/esm/package.json",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "format": "prettier --write \"**/*.ts\"",
+    "format:check": "prettier --check \"**/*.ts\"",
     "test": "mocha"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gepheum/buckwheat.git"
-  },
-  "author": "Tyler Fibonacci <gepheum@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gepheum/buckwheat/issues"
-  },
-  "homepage": "https://github.com/gepheum/buckwheat#readme",
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.6.0",
     "mocha": "^10.2.0",
