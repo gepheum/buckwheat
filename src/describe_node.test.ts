@@ -1,6 +1,6 @@
+import { describe, it } from "mocha";
 import { describeNode } from "./describe_node.js";
 import { expect } from "./expect.js";
-import { describe, it } from "mocha";
 
 describe("describeNode()", () => {
   it("describes simple node", () => {

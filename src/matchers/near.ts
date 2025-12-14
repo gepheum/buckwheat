@@ -32,7 +32,7 @@ export class NearMatcher extends Matcher<number> {
     };
   }
 
-  toString() {
+  toString(): string {
     return `near(${this.target}, ${this.epsilon})`;
   }
 }

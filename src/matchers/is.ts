@@ -29,7 +29,7 @@ export class IsMatcher<T> extends Matcher<T> {
     };
   }
 
-  toString() {
+  toString(): string {
     return describeValue(this.expected);
   }
 }

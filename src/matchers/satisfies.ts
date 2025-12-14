@@ -26,7 +26,7 @@ export class SatisfiesMatcher<T> extends Matcher<T> {
     };
   }
 
-  toString() {
+  toString(): string {
     let predicateName = this.predicate.name;
     if (!predicateName) {
       // An anonymous function.
