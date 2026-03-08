@@ -46,7 +46,7 @@ export class ArrayMatcher<Item> extends Matcher<Array<Item>> {
     };
   }
 
-  toString(): string {
+  override toString(): string {
     return describeValue(this.matchers);
   }
 }

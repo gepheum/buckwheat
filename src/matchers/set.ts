@@ -50,7 +50,7 @@ export class SetMatcher<T> extends Matcher<ReadonlySet<T>> {
     };
   }
 
-  toString(): string {
+  override toString(): string {
     return describeValue(this.expectedElements);
   }
 }

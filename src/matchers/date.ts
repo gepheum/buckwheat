@@ -25,7 +25,7 @@ export class DateMatcher extends Matcher<Date> {
     };
   }
 
-  toString(): string {
+  override toString(): string {
     return describeValue(this.expected);
   }
 }

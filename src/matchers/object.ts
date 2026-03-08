@@ -27,7 +27,7 @@ export class ObjectMatcher<T> extends Matcher<T> {
     };
   }
 
-  toString(): string {
+  override toString(): string {
     return describeValue(this.spec);
   }
 }

@@ -59,7 +59,7 @@ export class KeyedItemsMatcher<
     };
   }
 
-  toString(): string {
+  override toString(): string {
     return describeValue([...this.expectedEntries.values()]);
   }
 }

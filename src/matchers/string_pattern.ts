@@ -31,7 +31,7 @@ export class StringPatternMatcher extends Matcher<string | RegExp> {
     };
   }
 
-  toString(): string {
+  override toString(): string {
     return describeValue(this.expectedPattern);
   }
 }

@@ -49,7 +49,7 @@ export class MapMatcher<K, V> extends Matcher<ReadonlyMap<K, V>> {
     };
   }
 
-  toString(): string {
+  override toString(): string {
     return describeValue(this.expectedEntries);
   }
 }

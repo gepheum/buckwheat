@@ -42,7 +42,7 @@ export class ComparesMatcher extends Matcher<number | bigint> {
     };
   }
 
-  toString(): string {
+  override toString(): string {
     return `compares("${this.operator}", ${this.limit})`;
   }
 }
