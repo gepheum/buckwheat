@@ -60,7 +60,11 @@ export function valueToNode(
     } else if (typeof value === "bigint") {
       return simpleNode(`BigInt(${JSON.stringify(String(value))})`);
     } else if (
-      value instanceof Object &&
+      (value instanceof Object ||
+        // Null-prototype records fail instanceof Object.
+        (typeof value === "object" &&
+          value !== null &&
+          Object.getPrototypeOf(value) === null)) &&
       !(REPRESENT_AS_SIMPLE_NODE in value)
     ) {
       return objectToNode(value as Record<PropertyKey, unknown>, inProcess);

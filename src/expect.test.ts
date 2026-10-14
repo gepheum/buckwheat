@@ -20,6 +20,25 @@ describe("expect()", () => {
     });
   });
 
+  describe("objects without a prototype", () => {
+    it("supports matching references, including nested values", () => {
+      const value = Object.create(null);
+      expect(value).toBe(value);
+      expect({ value }).toMatch({ value: is(value) });
+    });
+
+    it("reports mismatched references as assertion failures", () => {
+      try {
+        expect(Object.create(null)).toBe(Object.create(null));
+      } catch (e) {
+        if (e instanceof AssertionError) {
+          return;
+        }
+      }
+      throw new AssertionError("`expect` should have thrown an AssertionError");
+    });
+  });
+
   describe("toMatch()", () => {
     it("when satisfied", () => {
       const o = {};
