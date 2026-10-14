@@ -107,6 +107,37 @@ describe("valueToNode()", () => {
     });
   });
 
+  it("works with null", () => {
+    expect(valueToNode(null)).toMatch({
+      kind: "simple",
+      description: "null",
+    });
+  });
+
+  it("works with objects without a prototype", () => {
+    const value = Object.assign(Object.create(null), { foo: 3 });
+    expect(valueToNode(value)).toMatch({
+      kind: "object",
+      record: {
+        foo: { kind: "simple", description: "3" },
+      },
+    });
+  });
+
+  it("works with nested recursive objects without a prototype", () => {
+    const value: Record<string, unknown> = Object.create(null);
+    value.self = value;
+    expect(valueToNode({ value })).toMatch({
+      kind: "object",
+      record: {
+        value: {
+          kind: "object",
+          record: { self: { kind: "..." } },
+        },
+      },
+    });
+  });
+
   it("works with recursive object", () => {
     const o: Record<string, unknown> = {};
     o["bar"] = o;
